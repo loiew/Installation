@@ -4,7 +4,7 @@ from pythonosc import udp_client #user datagram protocol library
 import serial
 import time
 
-arduino = serial.Serial(port='/dev/cu.usbmodem142201', baudrate=115200, timeout=1) 
+arduino = serial.Serial(port='/dev/cu.usbmodem14201', baudrate=115200, timeout=1) 
 time.sleep(2)
 
 # qlab constants
@@ -25,7 +25,6 @@ def read_arduino():
             if line:
                 distance = float(line)
                 print(distance)
-                return distance # Process distance here or update a global variable
 
 # listen for trigger (key press)
 def on_press(key):
@@ -63,3 +62,18 @@ def on_press(key):
 print("Listening for key press M... Press Ctrl+C to exit. Press S key to stop. Click on window before escaping(ESC) black screen.")
 with keyboard.Listener(on_press=on_press) as listener:
     listener.join()
+
+
+# Start keyboard listener non-blocking
+listener = keyboard.Listener(on_press=on_press)
+listener.start()
+
+try:
+    while True:
+        if arduino.in_waiting > 0:
+            line = arduino.readline().decode('utf-8', errors='ignore').rstrip()
+            if line:
+                distance = line
+        time.sleep(0.01)  # Prevents high CPU usage
+except KeyboardInterrupt:
+    listener.stop()

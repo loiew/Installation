@@ -1,7 +1,7 @@
 import serial 
 import time 
 
-arduino = serial.Serial(port='/dev/cu.usbmodem141201', baudrate=115200, timeout=1) 
+arduino = serial.Serial(port='/dev/cu.usbmodem14201', baudrate=115200, timeout=1) 
 # timeout: maximum time (in seconds) that readline() or read() will wait for data 
 # to arrive before giving up and returning whatever it has collected so far.
 

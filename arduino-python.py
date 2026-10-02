@@ -17,7 +17,7 @@ inside a try block prevents the script from crashing during execution.
 '''
 
 # Arduino Serial Setup
-arduino = serial.Serial(port='/dev/cu.usbmodem14201', baudrate=115200, timeout=1) 
+arduino = serial.Serial(port='/dev/cu.usbmodem142101', baudrate=115200, timeout=1) 
 time.sleep(2)
 
 # QLab OSC Setup

@@ -24,7 +24,7 @@ DEBOUNCE_THRESHOLD = 3  # Require 3 consecutive readings in a new zone before sw
 
 def get_zone(distance):
     """Map distance (inches) to a cue number with hysteresis safety."""
-    print(distance)
+    #print(distance, end=": ")
     if distance <= 66:
         print('less than 66')
         return 1
@@ -56,6 +56,7 @@ def on_press(key):
     global current_cue
     try:
         if key == keyboard.KeyCode.from_char('s'):
+            stop = True
             print("S key pressed! Stopping all cues...")
             client.send_message("/stop", [])
             current_cue = None
